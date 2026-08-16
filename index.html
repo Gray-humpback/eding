@@ -1,0 +1,919 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>분사 & 분사구문 마스터 트레이닝</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Chart.js CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        /* Chosen Palette: Warm Sand & Slate Olive */
+        :root {
+            --bg-main: #fcfbf7;
+            --card-bg: #ffffff;
+            --accent-green: #2d5e43;
+            --accent-sage: #3b7a57;
+            --accent-amber: #d97706;
+            --text-main: #1f2937;
+        }
+
+        body {
+            background-color: var(--bg-main);
+            color: var(--text-main);
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+        }
+
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 500px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 260px;
+            max-height: 300px;
+        }
+
+        .chip-btn {
+            transition: all 0.15s ease-in-out;
+        }
+        .chip-btn:hover {
+            transform: translateY(-1px);
+        }
+        .chip-btn:active {
+            transform: translateY(1px);
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col justify-between">
+
+    <!-- Header & Navigation -->
+    <header class="bg-white border-b border-stone-200 sticky top-0 z-50 shadow-sm">
+        <div class="max-w-6xl mx-auto px-4 py-4 flex flex-col md:flex-row justify-between items-center gap-4">
+            <div class="flex items-center gap-3">
+                <span class="text-3xl">🧩</span>
+                <div>
+                    <h1 class="text-xl font-bold text-stone-800">분사 & 분사구문 마스터 트레이닝</h1>
+                    <p class="text-xs text-stone-500">현재분사(-ing) • 과거분사(-ed) • 감정분사 • 분사구문 변환 완벽 정리</p>
+                </div>
+            </div>
+            
+            <nav class="flex flex-wrap gap-2 bg-stone-100 p-1 rounded-xl text-sm font-medium">
+                <button onclick="switchTab('overview')" id="tab-overview" class="px-4 py-2 rounded-lg bg-white shadow-sm text-emerald-800 font-bold transition">
+                    💡 개념 & 핵심 규칙 정리
+                </button>
+                <button onclick="switchTab('practice')" id="tab-practice" class="px-4 py-2 rounded-lg text-stone-600 hover:text-stone-900 transition">
+                    📝 분사 선택 & 영작 연습
+                </button>
+                <button onclick="switchTab('test')" id="tab-test" class="px-4 py-2 rounded-lg text-stone-600 hover:text-stone-900 transition">
+                    🎯 O/X & 실전 진단 테스트
+                </button>
+            </nav>
+             <!-- 메인 포털 이동 버튼 (상단 헤더 오른쪽) -->
+            <a href="https://gray-humpback.github.io/grammargo/" target="_self" class="px-3.5 py-2 bg-rose-600 hover:bg-rose-700 text-white font-bold text-xs rounded-xl transition shadow-sm flex items-center gap-1.5 shrink-0">
+                    <span>🏠</span> <span>메인 포털로 돌아가기</span>
+            </a>
+        </div>
+    </header>
+
+    <!-- Main Container -->
+    <main class="max-w-6xl mx-auto px-4 py-8 flex-grow w-full space-y-8">
+
+        <!-- SECTION 1: CORE CONCEPTS OVERVIEW -->
+        <section id="sec-overview" class="space-y-8">
+            
+            <!-- 1. Present vs Past Participle Comparison -->
+            <div class="bg-emerald-50/70 border border-emerald-200 rounded-2xl p-6 space-y-4">
+                <h2 class="text-lg font-bold text-emerald-900 flex items-center gap-2">
+                    <span>📌</span> 1. 분사(Participle)의 기본 개념: 현재분사 vs 과거분사
+                </h2>
+                <p class="text-sm text-stone-700 leading-relaxed">
+                    분사는 동사에서 형태를 바꾸어 <strong>형용사 역할(명사 수식, 보어)</strong>을 수행합니다. 수식받는 대상(명사)과의 관계가 <strong>능동/진행</strong>이면 <code>현재분사(-ing)</code>, <strong>수동/완료</strong>이면 <code>과거분사(p.p.)</code>를 사용합니다.
+                </p>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs">
+                    <div class="bg-white p-4 rounded-xl border border-emerald-300 shadow-sm space-y-2">
+                        <div class="flex items-center justify-between border-b pb-2">
+                            <span class="font-bold text-sm text-emerald-800">🌱 현재분사 (Present Participle)</span>
+                            <span class="px-2 py-0.5 bg-emerald-100 text-emerald-900 font-mono rounded font-bold">동사원형 + -ing</span>
+                        </div>
+                        <ul class="space-y-1 text-stone-700">
+                            <li>• <strong>의미:</strong> ~하는, ~하고 있는 (능동, 진행)</li>
+                            <li>• <strong>예시 1:</strong> a <u>swimming</u> boy (헤엄치고 있는 소년)</li>
+                            <li>• <strong>예시 2:</strong> Do you know the girl <u>playing</u> the piano?</li>
+                        </ul>
+                    </div>
+
+                    <div class="bg-white p-4 rounded-xl border border-amber-300 shadow-sm space-y-2">
+                        <div class="flex items-center justify-between border-b pb-2">
+                            <span class="font-bold text-sm text-amber-800">🍂 과거분사 (Past Participle)</span>
+                            <span class="px-2 py-0.5 bg-amber-100 text-amber-900 font-mono rounded font-bold">동사원형 + -ed / p.p.</span>
+                        </div>
+                        <ul class="space-y-1 text-stone-700">
+                            <li>• <strong>의미:</strong> ~해진, ~된 (수동, 완료)</li>
+                            <li>• <strong>예시 1:</strong> <u>boiled</u> eggs (삶아진 계란)</li>
+                            <li>• <strong>예시 2:</strong> I can't fix this <u>broken</u> toy. (부서진 장난감)</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 2. Emotion Participles Rule -->
+            <div class="bg-white rounded-2xl border border-stone-200 p-6 shadow-sm space-y-4">
+                <h3 class="text-md font-bold text-stone-800 flex items-center gap-2">
+                    <span>❤️</span> 2. 감정 형용사 분사의 핵심 공식 (Emotion Participles)
+                </h3>
+                <div class="bg-amber-50/80 p-4 rounded-xl border border-amber-200 text-xs leading-relaxed space-y-2">
+                    <p class="text-amber-900 font-bold text-sm">💡 "감정을 느끼는 주체는 p.p.(-ed), 감정을 일으키는 원인은 -ing!"</p>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-1">
+                        <div class="bg-white p-3 rounded-lg border border-amber-200">
+                            <strong class="text-emerald-800 block mb-1">사람 (느끼는 대상) ➔ 과거분사 (-ed)</strong>
+                            <p class="text-stone-600">I am <strong>surprised</strong> at the beautiful view.<br>(내가 감탄을 느낀 상태)</p>
+                            <p class="text-stone-600 mt-1">I am not <strong>interested</strong> in this story.<br>(내가 흥미를 느끼지 않음)</p>
+                        </div>
+                        <div class="bg-white p-3 rounded-lg border border-amber-200">
+                            <strong class="text-amber-800 block mb-1">사물/원인 (감정을 일으킴) ➔ 현재분사 (-ing)</strong>
+                            <p class="text-stone-600">The school prepared <strong>surprising</strong> events.<br>(놀라움을 주는 행사)</p>
+                            <p class="text-stone-600 mt-1">She was an <strong>interesting</strong> person.<br>(흥미를 유발하는 사람)</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 3. Noun Modifying & Complements -->
+            <div class="bg-white rounded-2xl border border-stone-200 p-6 shadow-sm space-y-4">
+                <h3 class="text-md font-bold text-stone-800 flex items-center gap-2">
+                    <span>📍</span> 3. 분사의 위치와 역할 (명사 수식 & 보어)
+                </h3>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-xs">
+                    <div class="bg-stone-50 p-4 rounded-xl border border-stone-200 space-y-1.5">
+                        <strong class="text-stone-800 block font-bold text-sm">① 전치 수식 (명사 앞)</strong>
+                        <p class="text-stone-600">분사 단독으로 명사를 직접 수식합니다.</p>
+                        <p class="font-mono text-emerald-800 bg-white p-2 rounded border border-stone-200">a <u>sleeping</u> baby<br>a <u>broken</u> chair</p>
+                    </div>
+                    <div class="bg-stone-50 p-4 rounded-xl border border-stone-200 space-y-1.5">
+                        <strong class="text-stone-800 block font-bold text-sm">② 후치 수식 (명사 뒤)</strong>
+                        <p class="text-stone-600">뒤에 목적어나 부사구를 동반할 때 후치 수식합니다.<br><em>※ [관대 + be동사] 생략 가능</em></p>
+                        <p class="font-mono text-emerald-800 bg-white p-2 rounded border border-stone-200">the girl <u>hit by the car</u><br>a book <u>written in English</u></p>
+                    </div>
+                    <div class="bg-stone-50 p-4 rounded-xl border border-stone-200 space-y-1.5">
+                        <strong class="text-stone-800 block font-bold text-sm">③ 보어 역할 (2형식 / 5형식)</strong>
+                        <p class="text-stone-600">주어나 목적어의 상태를 설명합니다.</p>
+                        <p class="font-mono text-emerald-800 bg-white p-2 rounded border border-stone-200">I found him <u>lying</u> on the floor.<br>She had her car <u>repaired</u>.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 4. Participle Clause (분사구문) Transformation -->
+            <div class="bg-white rounded-2xl border border-stone-200 p-6 shadow-sm space-y-4">
+                <h3 class="text-md font-bold text-stone-800 flex items-center gap-2">
+                    <span>⚡</span> 4. 접속사 부사절을 줄여쓰는 '분사구문' 만들기 3단계
+                </h3>
+                
+                <div class="bg-emerald-50/50 p-4 rounded-xl border border-emerald-200 space-y-3 text-xs">
+                    <div class="flex items-center gap-2">
+                        <span class="px-2 py-1 bg-emerald-700 text-white font-bold rounded">원래 문장</span>
+                        <span class="font-mono text-stone-800 font-bold">Because she felt tired, she went to bed early.</span>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-3 pt-2">
+                        <div class="bg-white p-3 rounded-lg border border-emerald-200">
+                            <span class="font-bold text-emerald-800 block mb-1">1단계: 접속사 생략</span>
+                            <p class="text-stone-600">의미상 명확하면 부사절 접속사(Because 등)를 지웁니다.<br><em>(강조 시 남길 수도 있음)</em></p>
+                        </div>
+                        <div class="bg-white p-3 rounded-lg border border-emerald-200">
+                            <span class="font-bold text-emerald-800 block mb-1">2단계: 주어 확인 & 생략</span>
+                            <p class="text-stone-600">부사절 주어(she)와 주절 주어(she)가 같으면 생략!<br><em>(다르면 주어 남김: 독립분사구문)</em></p>
+                        </div>
+                        <div class="bg-white p-3 rounded-lg border border-emerald-200">
+                            <span class="font-bold text-emerald-800 block mb-1">3단계: 동사 ➔ -ing 변환</span>
+                            <p class="text-stone-600">시제가 같고 능동이면 동사원형+-ing (felt ➔ <strong>Feeling</strong>). Being은 생략 가능!</p>
+                        </div>
+                    </div>
+
+                    <div class="flex items-center gap-2 pt-2 border-t border-emerald-200">
+                        <span class="px-2 py-1 bg-emerald-800 text-white font-bold rounded">완성 분사구문</span>
+                        <span class="font-mono text-emerald-900 font-bold text-sm">➔ Feeling tired, she went to bed early.</span>
+                    </div>
+                </div>
+
+                <!-- Special Rules for Participle Clauses -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs">
+                    <div class="bg-stone-50 p-3 rounded-xl border border-stone-200">
+                        <strong class="text-rose-700 block font-bold mb-1">🚫 분사구문의 부정 (Not / Never)</strong>
+                        <p class="text-stone-600">부정어 <code>not</code> 또는 <code>never</code>는 반드시 분사 바로 앞에 위치합니다.</p>
+                        <p class="font-mono text-rose-800 bg-white p-1.5 rounded border border-stone-200 mt-1"><strong>Not working</strong> hard, you will be fired.</p>
+                    </div>
+                    <div class="bg-stone-50 p-3 rounded-xl border border-stone-200">
+                        <strong class="text-amber-700 block font-bold mb-1">👥 주어가 다른 경우 (독립분사구문)</strong>
+                        <p class="text-stone-600">부사절과 주절의 주어가 다른 경우 부사절 주어를 생략하지 않고 그대로 둡니다.</p>
+                        <p class="font-mono text-amber-800 bg-white p-1.5 rounded border border-stone-200 mt-1">Because my mother was ill ➔ <strong>My mother being ill</strong>, I took care...</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="text-center pt-2">
+                <button onclick="switchTab('practice')" class="px-8 py-3.5 bg-emerald-700 hover:bg-emerald-800 text-white font-bold rounded-xl shadow-md transition transform hover:scale-105 flex items-center gap-2 mx-auto text-sm">
+                    <span>👉</span> 분사 선택 & 카드 영작 연습하러 가기
+                </button>
+            </div>
+        </section>
+
+        <!-- SECTION 2: PARTICIPLE & CLAUSE PRACTICE MODULE -->
+        <section id="sec-practice" class="hidden space-y-6">
+            <!-- Filter Bar -->
+            <div class="flex flex-wrap items-center justify-between gap-4 bg-white p-4 rounded-xl border border-stone-200 shadow-sm">
+                <div class="flex flex-wrap items-center gap-2">
+                    <span class="text-sm font-bold text-stone-700">연습 영역 선택:</span>
+                    <button onclick="setCategory('all')" id="cat-all" class="px-3 py-1.5 rounded-lg text-xs font-bold bg-emerald-700 text-white">전체 문항 (15문항)</button>
+                    <button onclick="setCategory('noun_mod')" id="cat-noun_mod" class="px-3 py-1.5 rounded-lg text-xs font-bold bg-stone-100 text-stone-600 hover:bg-stone-200">명사수식 & 보어 구문</button>
+                    <button onclick="setCategory('emotion')" id="cat-emotion" class="px-3 py-1.5 rounded-lg text-xs font-bold bg-stone-100 text-stone-600 hover:bg-stone-200">감정 형용사 분사</button>
+                    <button onclick="setCategory('clause')" id="cat-clause" class="px-3 py-1.5 rounded-lg text-xs font-bold bg-stone-100 text-stone-600 hover:bg-stone-200">부사절 ➔ 분사구문 변환</button>
+                </div>
+                <div class="text-xs text-stone-500">
+                    💡 단어 카드를 순서대로 클릭하고, 입력창에서 동사를 알맞은 분사형태(<strong>-ing / p.p.</strong>)로 변형해 보세요!
+                </div>
+            </div>
+
+            <!-- Card View Container -->
+            <div id="practice-card-container" class="bg-white rounded-2xl border border-stone-200 p-6 shadow-sm">
+                <!-- Dynamically Rendered by JS -->
+            </div>
+        </section>
+
+        <!-- SECTION 3: QUIZ & DIAGNOSTIC -->
+        <section id="sec-test" class="hidden space-y-6">
+            <div class="bg-stone-900 text-white p-6 rounded-2xl flex flex-col md:flex-row justify-between items-center gap-6 shadow-md">
+                <div>
+                    <span class="px-3 py-1 bg-amber-500/20 text-amber-300 border border-amber-500/30 rounded-full text-xs font-bold">실전 문법 진단</span>
+                    <h2 class="text-xl md:text-2xl font-bold mt-2">분사 & 분사구문 실전 진단 테스트</h2>
+                    <p class="text-xs text-stone-400 mt-1">수식 대상과의 능동/수동 관계, 감정 분사, 분사구문 오류를 판별해 보세요.</p>
+                </div>
+                <button onclick="resetTest()" class="px-5 py-2.5 bg-amber-500 hover:bg-amber-600 text-stone-950 font-bold rounded-xl text-sm transition shrink-0">
+                    🔄 테스트 다시 시작
+                </button>
+            </div>
+
+            <!-- Quiz Grid -->
+            <div id="quiz-wrapper" class="space-y-6">
+                <!-- Dynamic Quiz Questions Rendered Here -->
+            </div>
+
+            <!-- Test Summary Chart Dashboard -->
+            <div id="quiz-results" class="hidden bg-white rounded-2xl border border-stone-200 p-6 shadow-sm space-y-6">
+                <h3 class="text-xl font-bold text-center text-stone-800">🎯 분사 / 분사구문 진단 평가 결과 리포트</h3>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 items-center">
+                    <div class="chart-container">
+                        <canvas id="scoreChart"></canvas>
+                    </div>
+                    <div class="space-y-4">
+                        <div class="bg-stone-50 p-4 rounded-xl border border-stone-200">
+                            <p class="text-xs text-stone-500">최종 점수</p>
+                            <p class="text-3xl font-extrabold text-emerald-700" id="final-score-text">0 / 0</p>
+                        </div>
+                        <div class="bg-stone-50 p-4 rounded-xl border border-stone-200">
+                            <p class="text-xs text-stone-500">분사 영역 취약점 및 총평</p>
+                            <p class="text-sm font-medium text-stone-700 mt-1" id="diagnosis-text">테스트 제출 시 취약 영역 분석 및 맞춤 설명이 표시됩니다.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-white border-t border-stone-200 py-6">
+        <div class="max-w-6xl mx-auto px-4 text-center text-xs text-stone-400">
+            © 2026 분사 & 분사구문 마스터 트레이너 • Smart Grammar App
+        </div>
+    </footer>
+
+    <!-- JavaScript Application Logic -->
+    <script>
+        // Practice Dataset focused on Participles and Participle Clauses
+        const practiceData = [
+            // Category 1: noun_mod (명사수식 & 보어)
+            {
+                id: 1,
+                category: 'noun_mod',
+                categoryLabel: '후치 수식 (과거분사)',
+                kor: '나는 나의 아버지에 의해 지어진 집에서 산다.',
+                scrambled: ['I', 'live', 'in', 'the', 'house', 'build', 'by', 'my', 'father'],
+                answer: 'I live in the house built by my father.',
+                altAnswer: 'I live in the house built by my father',
+                explanation: '수식받는 대상인 house가 지어지는 수동 관계이므로 과거분사 built를 씁니다.'
+            },
+            {
+                id: 2,
+                category: 'noun_mod',
+                categoryLabel: '후치 수식 (현재분사)',
+                kor: '그에게 질문을 하고 있는 많은 사람들이 있다.',
+                scrambled: ['there', 'are', 'many', 'people', 'ask', 'him', 'questions'],
+                answer: 'There are many people asking him questions.',
+                altAnswer: 'There are many people asking him questions',
+                explanation: 'people이 능동적으로 질문을 하고 있는 상태이므로 현재분사 asking을 써야 합니다.'
+            },
+            {
+                id: 3,
+                category: 'noun_mod',
+                categoryLabel: '명사 전치 수식 (과거분사)',
+                kor: '나는 이 부서진 장난감을 고칠 수 없다.',
+                scrambled: ['I', 'can', 'not', 'fix', 'this', 'break', 'toy'],
+                answer: 'I cannot fix this broken toy.',
+                altAnswer: 'I can\'t fix this broken toy.',
+                explanation: '장난감(toy)이 부서진 수동/완료 상태를 나타내므로 과거분사 broken을 씁니다.'
+            },
+            {
+                id: 4,
+                category: 'noun_mod',
+                categoryLabel: '5형식 목적격 보어 (현재분사)',
+                kor: '나는 안토니오가 기타를 연주하는 것을 보았다.',
+                scrambled: ['I', 'saw', 'Antonio', 'play', 'the', 'guitar'],
+                answer: 'I saw Antonio playing the guitar.',
+                altAnswer: 'I saw Antonio play the guitar.',
+                explanation: '지각동사(saw)의 목적어 Antonio가 기타를 치고 있는 능동/진행 상태이므로 playing(또는 동사원형 play)을 씁니다.'
+            },
+            {
+                id: 5,
+                category: 'noun_mod',
+                categoryLabel: '5형식 사역 보어 (과거분사)',
+                kor: '학생들은 자신들의 이상한 행동으로 선생님들을 당황하게 만들었다.',
+                scrambled: ['the', 'students', 'had', 'their', 'teachers', 'embarrass', 'by', 'their', 'strange', 'behavior'],
+                answer: 'The students had their teachers embarrassed by their strange behavior.',
+                altAnswer: 'The students had their teachers embarrassed by their strange behavior',
+                explanation: '목적어인 teachers가 당황하게 된 수동의 상태이므로 과거분사 embarrassed를 씁니다.'
+            },
+
+            // Category 2: emotion (감정 형용사 분사)
+            {
+                id: 6,
+                category: 'emotion',
+                categoryLabel: '감정 분사 (사람 주체)',
+                kor: '나는 산의 아름다운 풍경에 놀랐다.',
+                scrambled: ['I', 'am', 'surprise', 'at', 'the', 'beautiful', 'view', 'of', 'the', 'mountain'],
+                answer: 'I am surprised at the beautiful view of the mountain.',
+                altAnswer: 'I am surprised at the beautiful view of the mountain',
+                explanation: '주어가 사람(I)이며 감정을 직접 느끼는 수동 대상이므로 과거분사 surprised를 씁니다.'
+            },
+            {
+                id: 7,
+                category: 'emotion',
+                categoryLabel: '감정 분사 (원인 사물)',
+                kor: '학교는 학생들을 위해 매우 놀라운 행사들을 준비했다.',
+                scrambled: ['the', 'school', 'prepared', 'very', 'surprise', 'events', 'for', 'students'],
+                answer: 'The school prepared very surprising events for students.',
+                altAnswer: 'The school prepared very surprising events for students',
+                explanation: '수식받는 대상인 events(행사)가 사람들에게 놀라움을 일으키는 원인이므로 현재분사 surprising을 씁니다.'
+            },
+            {
+                id: 8,
+                category: 'emotion',
+                categoryLabel: '감정 분사 (사람 주체)',
+                kor: '나는 이 이야기에 흥미가 없다.',
+                scrambled: ['I', 'am', 'not', 'interest', 'in', 'this', 'story'],
+                answer: 'I am not interested in this story.',
+                altAnswer: 'I am not interested in this story',
+                explanation: '주어(I)가 흥미라는 감정을 느끼는 주체이므로 과거분사 interested를 사용합니다.'
+            },
+            {
+                id: 9,
+                category: 'emotion',
+                categoryLabel: '감정 분사 (원인 유발자)',
+                kor: '그녀의 이야기를 들었을 때, 나는 그녀가 흥미로운 사람이라고 생각했다.',
+                scrambled: ['when', 'I', 'heard', 'her', 'story,', 'I', 'thought', 'she', 'was', 'an', 'interest', 'person'],
+                answer: 'When I heard her story, I thought she was an interesting person.',
+                altAnswer: 'When I heard her story I thought she was an interesting person.',
+                explanation: '그녀(she)가 타인에게 흥미를 유발하는 매력적인 인물이라는 의미이므로 현재분사 interesting을 씁니다.'
+            },
+
+            // Category 3: clause (부사절 ➔ 분사구문 변환)
+            {
+                id: 10,
+                category: 'clause',
+                categoryLabel: '분사구문 (동시동작/시간)',
+                kor: '음악을 들으면서, 그는 집을 청소했다.',
+                scrambled: ['listen', 'to', 'music,', 'he', 'cleaned', 'the', 'house'],
+                answer: 'Listening to music, he cleaned the house.',
+                altAnswer: 'Listening to music he cleaned the house.',
+                explanation: 'While he listened to music에서 접속사와 주어 he를 지우고 listened를 능동 현재분사 Listening으로 바꿉니다.'
+            },
+            {
+                id: 11,
+                category: 'clause',
+                categoryLabel: '분사구문 (이유)',
+                kor: '경찰을 보았을 때, 그들은 도움을 요청했다.',
+                scrambled: ['see', 'the', 'police,', 'they', 'called', 'for', 'help'],
+                answer: 'Seeing the police, they called for help.',
+                altAnswer: 'Seeing the police they called for help.',
+                explanation: 'When they saw the police에서 접속사/주어를 생략하고 동사 saw를 현재분사 Seeing으로 변경합니다.'
+            },
+            {
+                id: 12,
+                category: 'clause',
+                categoryLabel: '분사구문 (시간/비례)',
+                kor: '나이가 들어감에 따라, 나의 강아지는 약해지고 둔해졌다.',
+                scrambled: ['get', 'older,', 'my', 'puppy', 'became', 'weak', 'and', 'slow'],
+                answer: 'Getting older, my puppy became weak and slow.',
+                altAnswer: 'Getting older my puppy became weak and slow.',
+                explanation: 'As it got older 절을 줄여 get의 현재분사 형태인 Getting older로 표현합니다 (t 중복 표기 주의).'
+            },
+            {
+                id: 13,
+                category: 'clause',
+                categoryLabel: '분사구문 (조건)',
+                kor: '내 조언을 따른다면, 그는 다시 실패하지 않을 것이다.',
+                scrambled: ['follow', 'my', 'advice,', 'he', 'will', 'not', 'fail', 'again'],
+                answer: 'Following my advice, he will not fail again.',
+                altAnswer: 'Following my advice he will not fail again.',
+                explanation: 'If he follows my advice 절에서 접속사와 주어를 생략하고 Following으로 분사구문으로 바꿉니다.'
+            },
+            {
+                id: 14,
+                category: 'clause',
+                categoryLabel: '부정 분사구문',
+                kor: '열심히 일하지 않아서, 너는 해고당할 것이다.',
+                scrambled: ['not', 'work', 'hard,', 'you', 'will', 'be', 'fired'],
+                answer: 'Not working hard, you will be fired.',
+                altAnswer: 'Not working hard you will be fired.',
+                explanation: '분사구문의 부정은 부정어 Not을 분사 바로 앞에 배치하므로 Not working hard가 됩니다.'
+            },
+            {
+                id: 15,
+                category: 'clause',
+                categoryLabel: '독립분사구문 (주어 상이)',
+                kor: '날씨가 좋아서, 우리는 소풍을 갔다.',
+                scrambled: ['the', 'weather', 'be', 'fine,', 'we', 'went', 'on', 'a', 'picnic'],
+                answer: 'The weather being fine, we went on a picnic.',
+                altAnswer: 'The weather being fine we went on a picnic.',
+                explanation: '부사절의 주어(The weather)와 주절의 주어(we)가 서로 다르므로 주어 The weather를 남겨두는 독립분사구문(The weather being fine)을 만듭니다.'
+            }
+        ];
+
+        // Quiz Questions (Participles & Participle Clauses)
+        const oxQuizData = [
+            {
+                id: 101,
+                type: 'ox',
+                question: 'I found a boy crying in the playground.',
+                correctAnswer: 'O',
+                explanation: '소년(boy)이 능동적으로 울고 있는 진행 상태이므로 현재분사 crying이 올바르게 쓰였습니다.'
+            },
+            {
+                id: 102,
+                type: 'ox',
+                question: 'The movie was so interested that everyone stayed until the end.',
+                correctAnswer: 'X',
+                correctSentence: 'The movie was so interesting that everyone stayed until the end.',
+                explanation: '영화(movie)는 감정을 느끼는 주체가 아니라 감정을 유발하는 원인이므로 interested가 아닌 interesting을 써야 합니다.'
+            },
+            {
+                id: 103,
+                type: 'ox',
+                question: 'Working not hard, he failed the final exam.',
+                correctAnswer: 'X',
+                correctSentence: 'Not working hard, he failed the final exam.',
+                explanation: '분사구문의 부정어(not, never)는 반드시 분사 앞(Not working hard)에 위치해야 합니다.'
+            },
+            {
+                id: 104,
+                type: 'ox',
+                question: 'The letter written in French was difficult to understand.',
+                correctAnswer: 'O',
+                explanation: '편지(letter)는 프랑스어로 쓰여진 수동 관계이므로 과거분사 written이 수식하는 것이 맞습니다.'
+            },
+            {
+                id: 105,
+                type: 'ox',
+                question: 'Sleeping babies look like tiny angels.',
+                correctAnswer: 'O',
+                explanation: '여기서 sleeping은 명사 babies를 수식하는 현재분사(~하고 있는)로 올바른 쓰임입니다.'
+            },
+            {
+                id: 106,
+                type: 'mc',
+                question: 'Do you know the girl _______ the guitar on the stage?',
+                options: ['played', 'playing', 'play'],
+                correctIdx: 1,
+                explanation: '소녀(girl)가 능동적으로 기타를 치고 있는 중이므로 현재분사 playing이 들어갑니다.'
+            },
+            {
+                id: 107,
+                type: 'mc',
+                question: 'I was deeply _______ when I heard the shocking news.',
+                options: ['shocked', 'shocking', 'shock'],
+                correctIdx: 0,
+                explanation: '주어가 사람(I)이며 충격을 받은 것이므로 과거분사 shocked가 정답입니다.'
+            },
+            {
+                id: 108,
+                type: 'mc',
+                question: '_______ tired after a long walk, he fell asleep on the sofa.',
+                options: ['Feel', 'Felt', 'Feeling'],
+                correctIdx: 2,
+                explanation: 'Because he felt tired 부사절을 줄인 분사구문이므로 능동 현재분사 Feeling이 맞습니다.'
+            },
+            {
+                id: 109,
+                type: 'mc',
+                question: '_______ fine, we decided to go hiking.',
+                options: ['Being the weather', 'The weather being', 'It being the weather'],
+                correctIdx: 1,
+                explanation: '부사절 주어(The weather)와 주절 주어(we)가 다른 독립분사구문이므로 주어를 생략하지 않는 "The weather being"이 정답입니다.'
+            },
+            {
+                id: 110,
+                type: 'mc',
+                question: '다음 중 밑줄 친 부분의 성격이 [동명사]인 것은?',
+                options: ['a sleeping baby', 'Reading books is fun', 'the girl running fast'],
+                correctIdx: 1,
+                explanation: 'Reading books의 Reading은 문장의 주어로 쓰인 동명사(~하는 것)입니다. 나머지는 명사를 수식하는 현재분사입니다.'
+            }
+        ];
+
+        // State variables
+        let currentCategory = 'all';
+        let currentPracticeIdx = 0;
+        let selectedChips = [];
+        let userQuizAnswers = {};
+
+        // DOM Loaded Init
+        document.addEventListener("DOMContentLoaded", () => {
+            renderPracticeCard();
+            renderQuizList();
+        });
+
+        // Tab Navigation
+        function switchTab(tabId) {
+            ['overview', 'practice', 'test'].forEach(t => {
+                document.getElementById(`sec-${t}`).classList.add('hidden');
+                const btn = document.getElementById(`tab-${t}`);
+                if (btn) btn.className = "px-4 py-2 rounded-lg text-stone-600 hover:text-stone-900 transition";
+            });
+
+            document.getElementById(`sec-${tabId}`).classList.remove('hidden');
+            const activeBtn = document.getElementById(`tab-${tabId}`);
+            if (activeBtn) activeBtn.className = "px-4 py-2 rounded-lg bg-white shadow-sm text-emerald-800 font-bold transition";
+        }
+
+        // Category Filter for Practice
+        function setCategory(cat) {
+            currentCategory = cat;
+            currentPracticeIdx = 0;
+            
+            ['all', 'noun_mod', 'emotion', 'clause'].forEach(c => {
+                const b = document.getElementById(`cat-${c}`);
+                if (b) {
+                    b.className = (c === cat) 
+                        ? "px-3 py-1.5 rounded-lg text-xs font-bold bg-emerald-700 text-white"
+                        : "px-3 py-1.5 rounded-lg text-xs font-bold bg-stone-100 text-stone-600 hover:bg-stone-200";
+                }
+            });
+
+            renderPracticeCard();
+        }
+
+        // Helper: Filter Practice List
+        function getFilteredPracticeList() {
+            if (currentCategory === 'all') return practiceData;
+            return practiceData.filter(item => item.category === currentCategory);
+        }
+
+        // Render Practice Card
+        function renderPracticeCard() {
+            const list = getFilteredPracticeList();
+            const container = document.getElementById('practice-card-container');
+
+            if (list.length === 0) {
+                container.innerHTML = `<p class="text-center text-stone-500 py-8">해당 카테고리에 문항이 없습니다.</p>`;
+                return;
+            }
+
+            if (currentPracticeIdx >= list.length) currentPracticeIdx = 0;
+
+            const item = list[currentPracticeIdx];
+            selectedChips = [];
+
+            container.innerHTML = `
+                <div class="space-y-6">
+                    <!-- Progress Header -->
+                    <div class="flex justify-between items-center border-b pb-3">
+                        <span class="px-3 py-1 bg-emerald-100 text-emerald-800 rounded-full text-xs font-bold">
+                            ${item.categoryLabel} (${currentPracticeIdx + 1} / ${list.length})
+                        </span>
+                    </div>
+
+                    <!-- Target Korean Statement -->
+                    <div class="bg-stone-50 p-4 rounded-xl border border-stone-200">
+                        <p class="text-xs text-stone-400 font-bold mb-1">우리말 해석 및 조건</p>
+                        <p class="text-lg font-bold text-stone-800">"${item.kor}"</p>
+                    </div>
+
+                    <!-- Drop Zone for Chips -->
+                    <div>
+                        <div class="flex justify-between items-center mb-2">
+                            <label class="text-xs font-bold text-stone-600">조합된 단어 (클릭하여 추가/삭제):</label>
+                            <button onclick="clearSelectedChips()" class="text-xs text-rose-600 hover:underline font-medium">초기화</button>
+                        </div>
+                        <div id="drop-zone" class="min-h-[56px] p-3 bg-stone-100 border-2 border-dashed border-stone-300 rounded-xl flex flex-wrap gap-2 items-center">
+                            <span class="text-stone-400 text-xs">아래 카드를 순서대로 클릭하세요.</span>
+                        </div>
+                    </div>
+
+                    <!-- Available Word Chips Pool -->
+                    <div>
+                        <p class="text-xs font-bold text-stone-600 mb-2">제시어 카드 (클릭하여 배치):</p>
+                        <div id="chips-pool" class="flex flex-wrap gap-2">
+                            ${item.scrambled.map((word, idx) => `
+                                <button onclick="selectChip('${word}', ${idx})" id="chip-${idx}" class="chip-btn px-3 py-1.5 bg-white border border-stone-300 hover:border-emerald-500 rounded-lg text-sm font-medium text-stone-700 shadow-sm">
+                                    ${word}
+                                </button>
+                            `).join('')}
+                        </div>
+                    </div>
+
+                    <!-- Interactive Editable Input for Participle Conjugation -->
+                    <div>
+                        <label class="text-xs font-bold text-stone-600 mb-1 block">동사 변형 입력창 (제시된 동사를 문맥에 맞게 현재분사 -ing / 과거분사 p.p.로 고치세요):</label>
+                        <input type="text" id="user-final-input" class="w-full p-3 border border-stone-300 rounded-xl text-sm font-medium focus:ring-2 focus:ring-emerald-500 focus:outline-none" placeholder="카드를 배치하면 자동 완성됩니다. 동사 원형을 -ing 또는 p.p. 형태로 고쳐서 완성하세요." />
+                    </div>
+
+                    <!-- Action Navigation Buttons (Previous / Submit / Next) -->
+                    <div class="flex flex-wrap items-center gap-2 pt-2">
+                        <button onclick="prevPractice()" ${currentPracticeIdx === 0 ? 'disabled class="opacity-40 cursor-not-allowed px-3.5 py-2.5 bg-stone-100 text-stone-500 rounded-xl text-xs font-bold"' : 'class="px-3.5 py-2.5 bg-stone-100 hover:bg-stone-200 text-stone-700 rounded-xl text-xs font-bold transition shadow-sm"'}>
+                            ◀ 이전
+                        </button>
+                        
+                        <button onclick="checkPracticeAnswer()" class="flex-1 min-w-[150px] py-2.5 bg-emerald-700 hover:bg-emerald-800 text-white text-xs sm:text-sm font-bold rounded-xl shadow transition">
+                            정답 확인 및 분사 해설 보기 ✅
+                        </button>
+
+                        <button onclick="nextPractice()" ${currentPracticeIdx === list.length - 1 ? 'disabled class="opacity-40 cursor-not-allowed px-3.5 py-2.5 bg-stone-100 text-stone-500 rounded-xl text-xs font-bold"' : 'class="px-3.5 py-2.5 bg-stone-100 hover:bg-stone-200 text-stone-700 rounded-xl text-xs font-bold transition shadow-sm"'}>
+                            다음 ▶
+                        </button>
+                    </div>
+
+                    <!-- Feedback Area -->
+                    <div id="practice-feedback" class="hidden p-4 rounded-xl border"></div>
+                </div>
+            `;
+        }
+
+        function selectChip(word, idx) {
+            const btn = document.getElementById(`chip-${idx}`);
+            if (btn.disabled) return;
+
+            btn.disabled = true;
+            btn.classList.add('opacity-40', 'cursor-not-allowed');
+
+            selectedChips.push({ word, idx });
+            updateDropZoneAndInput();
+        }
+
+        function removeChip(arrayIdx) {
+            const removed = selectedChips.splice(arrayIdx, 1)[0];
+            const btn = document.getElementById(`chip-${removed.idx}`);
+            if (btn) {
+                btn.disabled = false;
+                btn.classList.remove('opacity-40', 'cursor-not-allowed');
+            }
+            updateDropZoneAndInput();
+        }
+
+        function clearSelectedChips() {
+            selectedChips.forEach(item => {
+                const btn = document.getElementById(`chip-${item.idx}`);
+                if (btn) {
+                    btn.disabled = false;
+                    btn.classList.remove('opacity-40', 'cursor-not-allowed');
+                }
+            });
+            selectedChips = [];
+            updateDropZoneAndInput();
+        }
+
+        function updateDropZoneAndInput() {
+            const dropZone = document.getElementById('drop-zone');
+            const input = document.getElementById('user-final-input');
+
+            if (selectedChips.length === 0) {
+                dropZone.innerHTML = `<span class="text-stone-400 text-xs">아래 카드를 순서대로 클릭하세요.</span>`;
+                input.value = "";
+                return;
+            }
+
+            dropZone.innerHTML = selectedChips.map((item, index) => `
+                <span onclick="removeChip(${index})" class="chip-btn px-3 py-1 bg-emerald-100 text-emerald-900 border border-emerald-300 rounded-lg text-xs font-bold cursor-pointer hover:bg-rose-100 hover:text-rose-800 transition">
+                    ${item.word} ✕
+                </span>
+            `).join('');
+
+            let sentence = selectedChips.map(c => c.word).join(' ');
+            sentence = sentence.charAt(0).toUpperCase() + sentence.slice(1);
+            input.value = sentence;
+        }
+
+        function checkPracticeAnswer() {
+            const list = getFilteredPracticeList();
+            const item = list[currentPracticeIdx];
+            const inputVal = document.getElementById('user-final-input').value.trim();
+            const feedback = document.getElementById('practice-feedback');
+
+            feedback.classList.remove('hidden', 'bg-emerald-50', 'border-emerald-200', 'bg-rose-50', 'border-rose-200');
+
+            const cleanUser = inputVal.replace(/[.,]/g, '').toLowerCase().replace(/\s+/g, ' ');
+            const cleanAns = item.answer.replace(/[.,]/g, '').toLowerCase().replace(/\s+/g, ' ');
+            const cleanAlt = item.altAnswer ? item.altAnswer.replace(/[.,]/g, '').toLowerCase().replace(/\s+/g, ' ') : '';
+
+            const isCorrect = (cleanUser === cleanAns || (cleanAlt && cleanUser === cleanAlt));
+
+            if (isCorrect) {
+                feedback.classList.add('bg-emerald-50', 'border-emerald-200');
+                feedback.innerHTML = `
+                    <div class="flex items-start gap-3">
+                        <span class="text-2xl">🎉</span>
+                        <div>
+                            <h4 class="font-bold text-emerald-900">정답입니다! 분사의 원리를 정확히 적용했어요!</h4>
+                            <p class="text-xs text-stone-700 font-mono mt-1"><strong>정답 문장:</strong> ${item.answer}</p>
+                            <p class="text-xs text-emerald-800 mt-2">💡 <strong>분사 핵심 해설:</strong> ${item.explanation}</p>
+                        </div>
+                    </div>
+                `;
+            } else {
+                feedback.classList.add('bg-rose-50', 'border-rose-200');
+                feedback.innerHTML = `
+                    <div class="flex items-start gap-3">
+                        <span class="text-2xl">💡</span>
+                        <div>
+                            <h4 class="font-bold text-rose-900">분사의 형태(-ing / p.p.)나 어순을 다시 점검해보세요.</h4>
+                            <p class="text-xs text-stone-700 font-mono mt-1"><strong>모범 정답:</strong> ${item.answer}</p>
+                            <p class="text-xs text-rose-800 mt-2">💡 <strong>문법 포인트:</strong> ${item.explanation}</p>
+                        </div>
+                    </div>
+                `;
+            }
+        }
+
+        function nextPractice() {
+            const list = getFilteredPracticeList();
+            currentPracticeIdx = (currentPracticeIdx + 1) % list.length;
+            renderPracticeCard();
+        }
+
+        function prevPractice() {
+            const list = getFilteredPracticeList();
+            currentPracticeIdx = (currentPracticeIdx - 1 + list.length) % list.length;
+            renderPracticeCard();
+        }
+
+        // Quiz Renderer
+        function renderQuizList() {
+            const container = document.getElementById('quiz-wrapper');
+            container.innerHTML = oxQuizData.map((q, idx) => {
+                if (q.type === 'ox') {
+                    return `
+                        <div class="bg-white rounded-2xl border border-stone-200 p-5 shadow-sm space-y-3">
+                            <div class="flex justify-between items-center">
+                                <span class="px-2.5 py-0.5 bg-stone-100 text-stone-700 rounded text-xs font-bold">문제 ${idx + 1} (O/X 분사 판별)</span>
+                            </div>
+                            <p class="text-base font-bold text-stone-800 font-mono">"${q.question}"</p>
+                            
+                            <div class="flex gap-4 pt-2">
+                                <button onclick="setQuizAnswer(${q.id}, 'O')" id="q-${q.id}-O" class="flex-1 py-3 border-2 border-stone-200 hover:border-emerald-500 rounded-xl font-bold text-lg text-stone-700 transition">
+                                    ⭕ 맞음 (O)
+                                </button>
+                                <button onclick="setQuizAnswer(${q.id}, 'X')" id="q-${q.id}-X" class="flex-1 py-3 border-2 border-stone-200 hover:border-rose-500 rounded-xl font-bold text-lg text-stone-700 transition">
+                                    ❌ 틀림 (X)
+                                </button>
+                            </div>
+                            <div id="q-${q.id}-explain" class="hidden p-3 rounded-lg text-xs bg-stone-50 border border-stone-200"></div>
+                        </div>
+                    `;
+                } else {
+                    return `
+                        <div class="bg-white rounded-2xl border border-stone-200 p-5 shadow-sm space-y-3">
+                            <div class="flex justify-between items-center">
+                                <span class="px-2.5 py-0.5 bg-amber-100 text-amber-800 rounded text-xs font-bold">문제 ${idx + 1} (알맞은 분사/구문 선택)</span>
+                            </div>
+                            <p class="text-base font-bold text-stone-800">${q.question}</p>
+                            
+                            <div class="grid grid-cols-1 md:grid-cols-3 gap-2 pt-2">
+                                ${q.options.map((opt, oIdx) => `
+                                    <button onclick="setQuizAnswer(${q.id}, ${oIdx})" id="q-${q.id}-opt-${oIdx}" class="p-3 border border-stone-200 hover:border-emerald-500 rounded-xl text-xs font-bold text-stone-700 transition">
+                                        ${opt}
+                                    </button>
+                                `).join('')}
+                            </div>
+                            <div id="q-${q.id}-explain" class="hidden p-3 rounded-lg text-xs bg-stone-50 border border-stone-200"></div>
+                        </div>
+                    `;
+                }
+            }).join('') + `
+                <div class="pt-4">
+                    <button onclick="submitQuiz()" class="w-full py-4 bg-stone-900 hover:bg-stone-800 text-white text-base font-bold rounded-2xl shadow-lg transition">
+                        📊 제출하고 분사 진단 결과 분석 보기
+                    </button>
+                </div>
+            `;
+        }
+
+        function setQuizAnswer(qId, val) {
+            userQuizAnswers[qId] = val;
+            const q = oxQuizData.find(item => item.id === qId);
+
+            if (q.type === 'ox') {
+                document.getElementById(`q-${qId}-O`).className = (val === 'O') 
+                    ? "flex-1 py-3 border-2 border-emerald-600 bg-emerald-50 rounded-xl font-bold text-lg text-emerald-800"
+                    : "flex-1 py-3 border-2 border-stone-200 rounded-xl font-bold text-lg text-stone-700";
+                document.getElementById(`q-${qId}-X`).className = (val === 'X') 
+                    ? "flex-1 py-3 border-2 border-rose-600 bg-rose-50 rounded-xl font-bold text-lg text-rose-800"
+                    : "flex-1 py-3 border-2 border-stone-200 rounded-xl font-bold text-lg text-stone-700";
+            } else {
+                q.options.forEach((_, oIdx) => {
+                    const btn = document.getElementById(`q-${qId}-opt-${oIdx}`);
+                    btn.className = (val === oIdx)
+                        ? "p-3 border-2 border-emerald-600 bg-emerald-50 rounded-xl text-xs font-bold text-emerald-900"
+                        : "p-3 border border-stone-200 rounded-xl text-xs font-bold text-stone-700";
+                });
+            }
+        }
+
+        let scoreChartInstance = null;
+
+        function submitQuiz() {
+            let correctCount = 0;
+
+            oxQuizData.forEach(q => {
+                const expBox = document.getElementById(`q-${q.id}-explain`);
+                expBox.classList.remove('hidden');
+
+                const userAns = userQuizAnswers[q.id];
+                let isRight = false;
+
+                if (q.type === 'ox') {
+                    isRight = (userAns === q.correctAnswer);
+                } else {
+                    isRight = (userAns === q.correctIdx);
+                }
+
+                if (isRight) {
+                    correctCount++;
+                    expBox.className = "p-3 rounded-lg text-xs bg-emerald-50 border border-emerald-200 text-emerald-900";
+                    expBox.innerHTML = `✅ <strong>정답!</strong> ${q.explanation} ${q.correctSentence ? `<br>👉 올바른 문장: <i>${q.correctSentence}</i>` : ''}`;
+                } else {
+                    expBox.className = "p-3 rounded-lg text-xs bg-rose-50 border border-rose-200 text-rose-900";
+                    expBox.innerHTML = `❌ <strong>오답!</strong> 정답: ${q.type === 'ox' ? q.correctAnswer : q.options[q.correctIdx]}.<br>${q.explanation} ${q.correctSentence ? `<br>👉 올바른 문장: <i>${q.correctSentence}</i>` : ''}`;
+                }
+            });
+
+            // Show results summary
+            const resultBox = document.getElementById('quiz-results');
+            resultBox.classList.remove('hidden');
+            document.getElementById('final-score-text').innerText = `${correctCount} / ${oxQuizData.length} 점`;
+
+            const scoreRatio = (correctCount / oxQuizData.length) * 100;
+            let diag = "";
+            if (scoreRatio === 100) {
+                diag = "🎉 분사(현재/과거분사) 및 분사구문 변환 능력이 완벽합니다! 모든 구문과 감정형용사를 바르게 이해하고 있습니다.";
+            } else if (scoreRatio >= 70) {
+                diag = "👍 분사 개념 이해도가 우수합니다! 틀린 문항의 해설을 통해 감정분사 원리나 독립분사구문을 다시 확인해보세요.";
+            } else {
+                diag = "⚠️ 수식 대상과의 능동/수동 관계, 부정어 위치, 그리고 주어가 다른 독립분사구문 규칙을 [개념 & 핵심 규칙] 탭에서 복습해보세요.";
+            }
+            document.getElementById('diagnosis-text').innerText = diag;
+
+            // Render Chart.js
+            const ctx = document.getElementById('scoreChart').getContext('2d');
+            if (scoreChartInstance) scoreChartInstance.destroy();
+
+            scoreChartInstance = new Chart(ctx, {
+                type: 'doughnut',
+                data: {
+                    labels: ['정답', '오답'],
+                    datasets: [{
+                        data: [correctCount, oxQuizData.length - correctCount],
+                        backgroundColor: ['#2d5e43', '#e11d48']
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { position: 'bottom' }
+                    }
+                }
+            });
+
+            resultBox.scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function resetTest() {
+            userQuizAnswers = {};
+            document.getElementById('quiz-results').classList.add('hidden');
+            renderQuizList();
+        }
+    </script>
+</body>
+</html>
